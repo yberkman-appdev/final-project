@@ -95,6 +95,9 @@
 
       </td>
 
+      
+      
+      
       <dt>
         
 
@@ -126,14 +129,33 @@
         </th>
       </tr>
       
+    <tr>
+   
+  
+
+     
+     
+  
+  
+  
+  <li class="list-group-item">
     
   <ul class="list-group list-group-flush">
+    
+     
     <%PackingList.where(trip_id: @trip.id).each do |item|%>
     
+    <td>
+      
+      
+      
+      
+      
+      
+      
+    </td>
     
-    
-    <li class="list-group-item">
-  <tr>
+ 
         <td>
       <%=item.item%>
        </td>
@@ -161,9 +183,10 @@
 
 
 
-
-
-
+</table>
+</div>
+</div>
+</div>
 
 
     </dd>
