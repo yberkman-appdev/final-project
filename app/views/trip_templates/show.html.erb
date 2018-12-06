@@ -1,0 +1,216 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Trip #<%= @trip.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/trips" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/trips/<%= @trip.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit trip
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_trip/<%= @trip.id %>" class="btn btn-block btn-outline-secondary">
+          Delete trip
+        </a>
+      </div>
+    </div>
+
+
+
+
+  <div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+         Where to
+        </th>
+
+        <th>
+          How long
+        </th>
+
+        <th>
+          Local Weather
+        </th>
+        </tr>
+
+      <tr>
+        
+        <td>
+        <%= @trip.destination %>
+      </td>
+      
+      <td>
+        <%= @trip.duration %>
+      </td>
+      
+      <td>
+        <%= @trip.season %>
+      </td>
+        
+      </tr>
+      </table>
+      </div>
+    </div>
+
+ 
+       
+
+      
+      <td>
+        Map
+      </td>
+      <td>
+        <!-- Code for Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB_nAWVr-18Oi_XoadzVHmNT2vevvJfev4"></script>
+<script>
+  var map;
+  function initialize() {
+    var myLatlng = new google.maps.LatLng(<%=@latitude%>, <%=@longitude%>);
+    var mapOptions = {
+      zoom: 15,
+      center: myLatlng
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Statue of Liberty'
+    });
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<div id="map-canvas" style="width: 100%; height: 400px"></div>
+
+      </td>
+
+      <dt>
+        
+
+      
+
+<div class="card mt-4" >
+  <div class="card-header">
+    Packing List
+  </div>
+  
+  <div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+         Item
+        </th>
+
+        <th>
+          Quantity
+        </th>
+
+        <th>
+          Edit
+        </th>
+        
+        <th>
+          Delete
+        </th>
+      </tr>
+      
+    
+  <ul class="list-group list-group-flush">
+    <%PackingList.where(trip_id: @trip.id).each do |item|%>
+    
+    
+    
+    <li class="list-group-item">
+  <tr>
+        <td>
+      <%=item.item%>
+       </td>
+
+        <td>
+   
+    <%=item.quantity%>
+    </td>
+    <td>
+            <a href="/update_item/<%= item.id %>/edit">
+            Edit
+          </a>
+           </td>
+           <td>
+          <a href="/delete_item/<%= item.id %>">
+            Delete 
+          </a>
+            
+    
+    </tr>
+    </li>
+    <%end%>
+  </ul>
+
+
+
+
+
+
+
+
+
+    </dd>
+
+      <dt>
+        
+    <div class="card-header">
+    Add a new item to the packing list
+  </div>
+  
+
+ <ul class = "list-group">
+  <li class = "list-group-item">
+
+
+ <form action="/create_item" method = "post">
+  <!-- Label and input for title -->
+  
+     
+  
+  <div class="form-group">
+    <label for="item">
+      Item Description
+    </label>
+
+    <input type="text" id="item" name="item" class="form-control">
+  </div>
+
+ <div class="form-group">
+    <label for="quantity">
+      Quantity
+    </label>
+
+  <input type="integer" id="quantity" name="quantity" class="form-control">
+  </div>
+   
+   <input type="hidden" name = "trip_id" value = "<%=@trip.id%>">
+   
+ <button class="btn btn-block btn-outline-secondary">
+    Add item
+  </button>
+</form>
+
+     <dd>
+      </dd>
+      
+    </dl>
+  </div>
+</div>
+
