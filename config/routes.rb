@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # UPDATE
   get("/packing_lists/:prefill_with_id/edit", { :controller => "packing_lists", :action => "edit_form" })
   post("/update_packing_list/:id_to_modify", { :controller => "packing_lists", :action => "update_row" })
+get("/update_item/:prefill_with_id/edit", { :controller => "packing_lists", :action => "edit_item" })
 post("/update_item/:id_to_modify", { :controller => "packing_lists", :action => "update_item" })
   # DELETE
   get("/delete_packing_list/:id_to_remove", { :controller => "packing_lists", :action => "destroy_row" })

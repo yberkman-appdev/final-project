@@ -18,12 +18,9 @@
     <table class="table">
       <tr>
         
-        <th>
-          Trip
-        </th>
 
         <th>
-          Packing List
+          Packing Lists
         </th>
 
 
@@ -39,17 +36,14 @@
 
         <td>
          <a href="/trips/<%= trip.id %>">
-          <%= trip.destination + " " + trip.duration.to_s + "-day " + trip.season + " Vacation" %>
+           
+          <%= trip.destination + " " + trip.duration.to_s + "-day " + trip.season.capitalize + " Vacation" %>
            </a>
         </td>
 
        
 
-        <td>
-          <a href="/trips/<%= trip.id %>">
-            View
-          </a>
-        </td>
+        
       </tr>
       <% end %>
     </table>

@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      Trip #<%= @trip.id %> details
+      <%= @trip.destination + " " + @trip.duration.to_s + "-day " + @trip.season.capitalize + " Vacation" %> 
     </h1>
 
     <div class="row mb-3">
@@ -47,7 +47,7 @@
       <tr>
         
         <td>
-        <%= @trip.destination %>
+        <%= @trip.destination.capitalize %>
       </td>
       
       <td>
@@ -55,7 +55,7 @@
       </td>
       
       <td>
-        <%= @trip.season %>
+        <%= @trip.season.capitalize %>
       </td>
         
       </tr>
@@ -142,11 +142,12 @@
     
   <ul class="list-group list-group-flush">
     
-     
-    <%PackingList.where(trip_id: @trip.id).each do |item|%>
+    <%PackingList.where(trip_id: @trip.id).where("quantity > ?", 0).each do |item|%>
     
     <td>
       
+      
+
       
       
       
@@ -224,6 +225,8 @@
   </div>
    
    <input type="hidden" name = "trip_id" value = "<%=@trip.id%>">
+   
+   <input type="hidden" name = "packed" value = false>
    
  <button class="btn btn-block btn-outline-secondary">
     Add item

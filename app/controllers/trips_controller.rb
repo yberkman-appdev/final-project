@@ -30,7 +30,7 @@ class TripsController < ApplicationController
   def create_row
     @trip = Trip.new
 
-    @trip.destination = params.fetch("destination")
+    @trip.destination = params.fetch("destination").downcase
     @trip.duration = params.fetch("duration")
     @trip.season = params.fetch("season")
     @trip.user_id = params.fetch("user_id")
@@ -57,6 +57,7 @@ class TripsController < ApplicationController
         @list.item = "bra"
         @list.quantity = bra_quantity
         @list.trip_id = @trip.id
+        @list.packed = false
         @list.save
         
         #UNDERWEAR
@@ -73,6 +74,7 @@ class TripsController < ApplicationController
         @list.item = "underwear"
         @list.quantity = @trip.duration
         @list.trip_id = @trip.id
+        @list.packed = false
         @list.save
         
      #FLIPFLOPS
@@ -87,6 +89,7 @@ class TripsController < ApplicationController
       @list.item = "flip flops"
       @list.quantity = sandals_quantity
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
       
       #WALKING SHOES
@@ -95,6 +98,7 @@ class TripsController < ApplicationController
       @list.item = "walking shoes"
       @list.quantity = 1
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
       
       # DRESS SHOES
@@ -103,6 +107,7 @@ class TripsController < ApplicationController
       @list.item = "dress shoes"
       @list.quantity = 1
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
 
       #SLEEPWEAR
@@ -111,6 +116,7 @@ class TripsController < ApplicationController
       @list.item = "sleepwear"
       @list.quantity = 1
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
       
       #SWIMWEAR
@@ -133,6 +139,7 @@ class TripsController < ApplicationController
       @list.item = "swimwear"
       @list.quantity = swimwear_quantity
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
 
       #LIGHT JACKET
@@ -146,6 +153,7 @@ class TripsController < ApplicationController
       @list.item = "light_jacket"
       @list.quantity = light_jacket_quantity
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
       
       #OUTERWEAR
@@ -159,6 +167,7 @@ class TripsController < ApplicationController
       @list.item = "outerwear"
       @list.quantity = outerwear_quantity
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
       
       #SWEATERS
@@ -179,6 +188,7 @@ class TripsController < ApplicationController
       @list.item = "sweater"
       @list.quantity = sweater_quantity
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
       
       #SOCKS
@@ -201,6 +211,7 @@ class TripsController < ApplicationController
       @list.item = "socks"
       @list.quantity = sock_quantity
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
 
     #SKIRTS
@@ -215,6 +226,7 @@ class TripsController < ApplicationController
         @list.item = "skirt"
         @list.quantity = skirt_quantity
         @list.trip_id = @trip.id
+        @list.packed = false
         @list.save
         
         #DRESSES  
@@ -233,6 +245,7 @@ class TripsController < ApplicationController
         @list.item = "dress"
         @list.quantity = dress_quantity
         @list.trip_id = @trip.id
+        @list.packed = false
         @list.save
         
         
@@ -257,6 +270,7 @@ class TripsController < ApplicationController
         @list.item = "shorts"
         @list.quantity = short_quantity
         @list.trip_id = @trip.id
+        @list.packed = false
         @list.save
 
       #JEANS
@@ -289,6 +303,7 @@ class TripsController < ApplicationController
       @list.item = "jeans"
       @list.quantity = jean_quantity
       @list.trip_id = @trip.id
+      @list.packed = false
       @list.save
 
 
@@ -303,8 +318,10 @@ class TripsController < ApplicationController
         
         
       @packing_list = PackingList.all
+      
+      redirect_to("/trips/#{@trip.id}", :notice => "Trip created successfully.")
 
-      redirect_back(:fallback_location => "/trips/#{@trip.id}", :notice => "Trip created successfully.")
+      
        else
       render("trip_templates/new_form_with_errors.html.erb")
     end
@@ -319,7 +336,7 @@ class TripsController < ApplicationController
   def update_row
     @trip = Trip.find(params.fetch("id_to_modify"))
 
-    @trip.destination = params.fetch("destination")
+    @trip.destination = params.fetch("destination").downcase
     @trip.duration = params.fetch("duration")
     @trip.season = params.fetch("season")
     @trip.user_id = params.fetch("user_id")
@@ -327,7 +344,7 @@ class TripsController < ApplicationController
     if @trip.valid?
       @trip.save
 
-      redirect_to("/trips/#{@trip.id}", :notice => "Trip updated successfully.")
+      redirect_back("/trips/#{@trip.id}", :notice => "Trip updated successfully.")
     else
       render("trip_templates/edit_form_with_errors.html.erb")
     end

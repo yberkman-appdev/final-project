@@ -75,9 +75,48 @@ class PackingListsController < ApplicationController
       @item.save
 
      redirect_back(:fallback_location => "/trips/#{@trip.id}", :notice => "Item created successfully.")
+      else
+      
+      redirect_back(:fallback_location => "/trips/#{@trip.id}", :alert => "Could not create item. 
+      Item description cannot be blank. Quantity must be greater than 0")
+    
 
     end
+    end
+    
+    
+    def edit_item
+    @item = PackingList.find(params.fetch("prefill_with_id"))
+
+    render("packing_list_templates/edit_item.html.erb")
   end
+  
+ 
+     def update_item
+    @item = PackingList.find(params.fetch("id_to_modify"))
+
+    @item.item = params.fetch("item")
+    @item.quantity = params.fetch("quantity")
+    @item.trip_id = params.fetch("trip_id")
+    @item.packed = params.fetch("")
+
+    if @item.valid?
+      @item.save
+
+      redirect_to("/trips/#{@item.trip_id}", :notice => "Item updated successfully.")
+    else
+      render("packing_list_templates/edit_item_with_errors.html.erb")
+    end
+  end
+  
+   def destroy_item
+    @item = PackingList.find(params.fetch("id_to_remove"))
+
+        @item.destroy
+
+    redirect_to("/trips/#{@item.trip_id}", :notice => "Item deleted successfully.")
+  end
+  
   
   
 end

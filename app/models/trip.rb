@@ -14,10 +14,14 @@
 class Trip < ApplicationRecord
     
   validates :user_id, presence: true
+  validates :destination, presence: true
   validates :season, presence: true
   validates :duration, presence: true
+  validates :duration, :numericality => { :greater_than => 0 }
     
-belongs_to :user
 
+
+belongs_to :user
+has_many :packing_lists, :dependent => :destroy
     
 end

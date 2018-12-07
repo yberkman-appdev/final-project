@@ -30,6 +30,6 @@ validates :username, uniqueness: true
 validates :gender, presence: true
 
 has_many :packing_lists, :through => :trips, :source => :packing_lists
-has_many :trips
+has_many :trips, :dependent => :destroy
          
 end
