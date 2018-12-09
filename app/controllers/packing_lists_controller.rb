@@ -70,6 +70,7 @@ class PackingListsController < ApplicationController
     @item.item = params.fetch("item")
     @item.quantity = params.fetch("quantity")
     @item.trip_id = params.fetch("trip_id")
+    @item.packed = false
 
     if @item.valid?
       @item.save
@@ -98,7 +99,7 @@ class PackingListsController < ApplicationController
     @item.item = params.fetch("item")
     @item.quantity = params.fetch("quantity")
     @item.trip_id = params.fetch("trip_id")
-    @item.packed = params.fetch("")
+    @item.packed = false
 
     if @item.valid?
       @item.save
@@ -116,6 +117,45 @@ class PackingListsController < ApplicationController
 
     redirect_to("/trips/#{@item.trip_id}", :notice => "Item deleted successfully.")
   end
+  
+  
+   def create_check
+    @item = PackingList.find(params.fetch("id_to_modify"))
+
+    @item.item = params.fetch("item")
+    @item.quantity = params.fetch("quantity")
+    @item.trip_id = params.fetch("trip_id")
+    @item.packed = params.fetch("packed")
+
+    if @item.valid?
+      @item.save
+
+      redirect_to("/trips/#{@item.trip_id}", :notice => "Packing list updated successfully.")
+    else
+      render("packing_list_templates/edit_form_with_errors.html.erb")
+    end
+  end
+  
+  
+  def delete_check
+    
+    @item = PackingList.find(params.fetch("id_to_modify"))
+
+    @item.item = params.fetch("item")
+    @item.quantity = params.fetch("quantity")
+    @item.trip_id = params.fetch("trip_id")
+    @item.packed = params.fetch("packed")
+
+    if @item.valid?
+      @item.save
+
+      redirect_to("/trips/#{@item.trip_id}", :notice => "Packing list updated successfully.")
+    else
+      render("packing_list_templates/edit_form_with_errors.html.erb")
+    end
+  end
+  
+  
   
   
   

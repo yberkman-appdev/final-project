@@ -1,24 +1,26 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
+      <center>
       <%= @trip.destination + " " + @trip.duration.to_s + "-day " + @trip.season.capitalize + " Vacation" %> 
+    </center>
     </h1>
 
     <div class="row mb-3">
       <div class="col">
-        <a href="/trips" class="btn btn-block btn-outline-secondary">
+        <a href="/trips" class="btn btn-block btn-outline-info">
           Go back
         </a>
       </div>
 
       <div class="col">
-        <a href="/trips/<%= @trip.id %>/edit" class="btn btn-block btn-outline-secondary">
+        <a href="/trips/<%= @trip.id %>/edit" class="btn btn-block btn-outline-info">
           Edit trip
         </a>
       </div>
 
       <div class="col">
-        <a href="/delete_trip/<%= @trip.id %>" class="btn btn-block btn-outline-secondary">
+        <a href="/delete_trip/<%= @trip.id %>" class="btn btn-block btn-outline-info">
           Delete trip
         </a>
       </div>
@@ -30,32 +32,44 @@
   <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
-      <tr>
+      <tr class="table-info">
         <th>
+          <center>
          Where to
+         </center>
         </th>
 
         <th>
+          <center>
           How long
+          </center>
         </th>
 
         <th>
+          <center>
           Local Weather
+           </center>
         </th>
         </tr>
 
       <tr>
         
         <td>
+          <center>
         <%= @trip.destination.capitalize %>
+      </center>
       </td>
       
       <td>
+        <center>
         <%= @trip.duration %>
+        </center>
       </td>
       
       <td>
+        <center>
         <%= @trip.season.capitalize %>
+        </center>
       </td>
         
       </tr>
@@ -67,9 +81,7 @@
        
 
       
-      <td>
-        Map
-      </td>
+
       <td>
         <!-- Code for Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB_nAWVr-18Oi_XoadzVHmNT2vevvJfev4"></script>
@@ -104,28 +116,47 @@
       
 
 <div class="card mt-4" >
-  <div class="card-header">
+  <div class="card border-info">
+  <div class="card-header bg-white ">
+    <center>
     Packing List
+    </center>
   </div>
-  
+  </div>
+ 
   <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
-      <tr>
+      
+      <tr class=>
+        
         <th>
+          <center>
+         Packed
+         </center>
+        </th>
+        <th>
+          <center>
          Item
+         </center>
         </th>
 
         <th>
+          <center>
           Quantity
+          </center>
         </th>
 
         <th>
+          <center>
           Edit
+          </center>
         </th>
         
         <th>
+          <center>
           Delete
+          </center>
         </th>
       </tr>
       
@@ -138,41 +169,75 @@
   
   
   
-  <li class="list-group-item">
+
     
   <ul class="list-group list-group-flush">
     
     <%PackingList.where(trip_id: @trip.id).where("quantity > ?", 0).each do |item|%>
-    
-    <td>
       
-      
+      <td>
+        <center>
+        
+        <%if item.packed == false %>
+        <form action ="/create_check/<%=item.id%>/edit" method ="post">
+          <div class="form-group">
+        <input type="checkbox" name="packed" value="true"><br>
+         <input type="hidden" name="item" value="<%= item.item %>">
+          <input type="hidden" name="quantity" value="<%= item.quantity %>">  
+          <input type="hidden" name="trip_id" value="<%= item.trip_id %>"> 
+          <input type="submit" value="Submit">
 
-      
-      
-      
-      
-      
-      
-    </td>
+        </form>
+        
+        <%else%>
+         <form action ="/delete_check/<%=item.id%>/edit" method ="post">
+               <div class="form-group">
+        
+        <input type="checkbox" name="packed" value="false" checked><br>
+         <input type="hidden" name="item" value="<%=item.item %>">
+          <input type="hidden" name="quantity" value="<%=item.quantity %>">  
+          <input type="hidden" name="trip_id" value="<%= item.trip_id %>"> 
+        
+          <input type="submit" value="Submit">
+          </form>
+
+      <%end%>
+       
+       </center>
+           </td>
+        
+        
+        
+  
     
  
         <td>
+          <center>
       <%=item.item%>
+      </center>
        </td>
 
         <td>
-   
+   <center>
     <%=item.quantity%>
+    </center>
     </td>
+    
+    
     <td>
+      <center>
             <a href="/update_item/<%= item.id %>/edit">
             Edit
           </a>
+          </center>
            </td>
+          
+          
            <td>
+             <center>
           <a href="/delete_item/<%= item.id %>">
             Delete 
+            </center>
           </a>
             
     
@@ -194,8 +259,21 @@
 
       <dt>
         
-    <div class="card-header">
+    <div class="card mt-4" >
+    <div class="card border-info rounded">
+    <div class="card-header bg-white">
+
+
+
+
+
+      <center>
     Add a new item to the packing list
+    </center>
+
+    
+  </div>
+  </div>
   </div>
   
 
@@ -207,8 +285,8 @@
   <!-- Label and input for title -->
   
      
-  
-  <div class="form-group">
+   
+  <div class="form-group" >
     <label for="item">
       Item Description
     </label>
@@ -226,7 +304,7 @@
    
    <input type="hidden" name = "trip_id" value = "<%=@trip.id%>">
    
-   <input type="hidden" name = "packed" value = false>
+   
    
  <button class="btn btn-block btn-outline-secondary">
     Add item

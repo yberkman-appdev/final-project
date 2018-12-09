@@ -40,6 +40,9 @@ post("/update_item/:id_to_modify", { :controller => "packing_lists", :action => 
   get("/delete_trip/:id_to_remove", { :controller => "trips", :action => "destroy_row" })
 
   #------------------------------
+  
+  post("/create_check/:id_to_modify/edit", { :controller => "packing_lists", :action => "create_check" })
+  post("/delete_check/:id_to_modify/edit", { :controller => "packing_lists", :action => "delete_check" })
 
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
