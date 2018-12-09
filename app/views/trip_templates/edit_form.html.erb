@@ -1,8 +1,8 @@
-<h1>
+<h1 >
   Edit trip details
 </h1>
 
-<hr>
+<hr class = "border-info">
 
 <form action="/update_trip/<%= @trip.id %>" method="post">
 
@@ -11,7 +11,7 @@
       Where to
     </label>
 
-    <input type="text" id="destination" name="destination" class="form-control" value="<%= @trip.destination %>">
+    <input type="text" id="destination" name="destination" class="form-control border-info" value="<%= @trip.destination %>">
   </div>
 
   <div class="form-group">
@@ -19,10 +19,10 @@
       How long
     </label>
 
-    <input type="text" id="duration" name="duration" class="form-control" value="<%= @trip.duration %>">
+    <input type="text" id="duration" name="duration" class="form-control border-info" value="<%= @trip.duration %>">
   </div>
 
-  <div class="form-group">
+  <div class="form-group border-info">
     <label for="season">
       Local Weather
     </label>
@@ -45,12 +45,12 @@
     <input type="hidden" name = "user_id" value = "<%=@trip.user_id%>">
   </div>
 
-  <button class="btn btn-block btn-outline-secondary">
+  <button class="btn btn-block btn-outline-info">
     Update trip
   </button>
 </form>
 
-<hr>
+<hr class = "border-info">
 
 <a href="/trips">
   Go back

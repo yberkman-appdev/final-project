@@ -2,7 +2,7 @@
   Edit item
 </h1>
 
-<hr>
+<hr class ="border-info">
 
 <form action="/update_item/<%= @item.id %>" method="post">
 
@@ -11,7 +11,7 @@
       Item Description
     </label>
 
-    <input type="text" id="item" name="item" class="form-control" value="<%= @item.item %>">
+    <input type="text" id="item" name="item" class="form-control border-info" value="<%= @item.item %>">
   </div>
 
   <div class="form-group">
@@ -19,7 +19,7 @@
       Quantity
     </label>
 
-    <input type="integer" id="quantity" name="quantity" class="form-control" value="<%= @item.quantity %>">
+    <input type="integer" id="quantity" name="quantity" class="form-control border-info" value="<%= @item.quantity %>">
   </div>
 
   
@@ -29,12 +29,12 @@
     <input type="hidden" name = "trip_id" value = "<%=@item.trip_id%>">
   </div>
 
-  <button class="btn btn-block btn-outline-secondary">
+  <button class="btn btn-block btn-outline-info">
     Update item
   </button>
 </form>
 
-<hr>
+<hr class ="border-info">
 
 <a href="/trips/<%=@item.trip_id%>">
   Go back
