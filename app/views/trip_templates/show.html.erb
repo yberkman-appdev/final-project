@@ -185,6 +185,7 @@
          <input type="hidden" name="item" value="<%= item.item %>">
           <input type="hidden" name="quantity" value="<%= item.quantity %>">  
           <input type="hidden" name="trip_id" value="<%= item.trip_id %>"> 
+          <input type="hidden" name="user_created" value="<%= item.user_created %>"> 
           <input type="submit" value="Submit">
 
         </form>
@@ -197,7 +198,7 @@
          <input type="hidden" name="item" value="<%=item.item %>">
           <input type="hidden" name="quantity" value="<%=item.quantity %>">  
           <input type="hidden" name="trip_id" value="<%= item.trip_id %>"> 
-        
+        <input type="hidden" name="user_created" value="<%= item.user_created %>"> 
           <input type="submit" value="Submit">
           </form>
 
@@ -257,7 +258,7 @@
 
     </dd>
 
-      <dt>
+      <dt >
         
     <div class="card mt-4" >
     <div class="card border-info rounded">
@@ -291,7 +292,7 @@
       Item Description
     </label>
 
-    <input type="text" id="item" name="item" class="form-control">
+    <input type="text" id="item" name="item" class="form-control" placeholder = "I want to pack this">
   </div>
 
  <div class="form-group">
@@ -299,14 +300,14 @@
       Quantity
     </label>
 
-  <input type="integer" id="quantity" name="quantity" class="form-control">
+  <input type="integer" id="quantity" name="quantity" class="form-control" placeholder = "How many?">
   </div>
    
    <input type="hidden" name = "trip_id" value = "<%=@trip.id%>">
    
    
    
- <button class="btn btn-block btn-outline-secondary">
+ <button class="btn btn-block btn-outline-info border-secondary">
     Add item
   </button>
 </form>

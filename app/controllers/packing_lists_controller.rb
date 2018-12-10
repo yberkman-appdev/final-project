@@ -71,6 +71,7 @@ class PackingListsController < ApplicationController
     @item.quantity = params.fetch("quantity")
     @item.trip_id = params.fetch("trip_id")
     @item.packed = false
+    @item.user_created = true
 
     if @item.valid?
       @item.save
@@ -100,6 +101,7 @@ class PackingListsController < ApplicationController
     @item.quantity = params.fetch("quantity")
     @item.trip_id = params.fetch("trip_id")
     @item.packed = false
+    @item.user_created = params.fetch("user_created")
 
     if @item.valid?
       @item.save
@@ -126,6 +128,7 @@ class PackingListsController < ApplicationController
     @item.quantity = params.fetch("quantity")
     @item.trip_id = params.fetch("trip_id")
     @item.packed = params.fetch("packed")
+    @item.user_created = params.fetch("user_created")
 
     if @item.valid?
       @item.save
@@ -145,6 +148,7 @@ class PackingListsController < ApplicationController
     @item.quantity = params.fetch("quantity")
     @item.trip_id = params.fetch("trip_id")
     @item.packed = params.fetch("packed")
+    @item.user_created = params.fetch("user_created")
 
     if @item.valid?
       @item.save

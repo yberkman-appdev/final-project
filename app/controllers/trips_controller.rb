@@ -39,16 +39,16 @@ class TripsController < ApplicationController
       @trip.save
       
     # where algorithim starts  
-      no_of_weeks= @trip.duration/7.to_i
+      no_of_weeks= (@trip.duration/7).to_i
       
      # SHORT SLEEVE SHIRTS
     
     if @trip.duration >= 1 and @trip.season == "summer"
       short_sleeve_quantity = @trip.duration
       elsif @trip.season == "spring" and @trip.duration >1
-      short_sleeve_quantity = (3/4 * @trip.duration).to_i
+      short_sleeve_quantity = (@trip.duration * 0.75).to_i
       elsif @trip.season == "fall" and @trip.duration > 1
-      short_sleeve_quantity = (1/2 * @trip.duration).to_i
+      short_sleeve_quantity = (@trip.duration * 0.5).to_i
       elsif @trip.season == "spring" and @trip.duration == 1
       short_sleeve_quantity = 1
       elsif @trip.season ==  "fall" and @trip.duration == 1
@@ -63,6 +63,7 @@ class TripsController < ApplicationController
       @list.quantity = short_sleeve_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+      @list.user_created = false
       @list.save
   
             
@@ -87,6 +88,7 @@ class TripsController < ApplicationController
       @list.quantity = long_sleeve_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       
@@ -113,6 +115,7 @@ class TripsController < ApplicationController
       @list.quantity = sweater_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       
@@ -133,6 +136,7 @@ class TripsController < ApplicationController
       @list.quantity = dress_shirt_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
 
@@ -149,6 +153,7 @@ class TripsController < ApplicationController
       @list.quantity = light_jacket_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       #OUTERWEAR
@@ -163,6 +168,7 @@ class TripsController < ApplicationController
       @list.quantity = outerwear_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
        
        
@@ -196,6 +202,7 @@ class TripsController < ApplicationController
         @list.quantity = short_quantity
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
         #SKIRTS
@@ -215,6 +222,7 @@ class TripsController < ApplicationController
         @list.quantity = skirt_quantity
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
         #DRESSES  
@@ -236,6 +244,7 @@ class TripsController < ApplicationController
         @list.quantity = dress_quantity
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
 
@@ -270,6 +279,7 @@ class TripsController < ApplicationController
       @list.quantity = jean_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
        #SWIMWEAR
@@ -293,6 +303,7 @@ class TripsController < ApplicationController
       @list.quantity = swimwear_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
       #FLIPFLOPS
@@ -310,6 +321,7 @@ class TripsController < ApplicationController
       @list.quantity = sandals_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       #WALKING SHOES
@@ -319,6 +331,7 @@ class TripsController < ApplicationController
       @list.quantity = 1
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       # DRESS SHOES
@@ -328,6 +341,7 @@ class TripsController < ApplicationController
       @list.quantity = 1
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
       
@@ -340,6 +354,7 @@ class TripsController < ApplicationController
       @list.quantity = 1
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save 
       
       #BRAS
@@ -355,10 +370,11 @@ class TripsController < ApplicationController
     end
 				
         @list = PackingList.new
-        @list.item = "bra"
+        @list.item = "bras"
         @list.quantity = bra_quantity
         @list.trip_id = @trip.id
         @list.packed = "false"
+         @list.user_created = false
         @list.save
         
         #UNDERWEAR
@@ -376,6 +392,7 @@ class TripsController < ApplicationController
         @list.quantity = @trip.duration
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
         
@@ -402,6 +419,7 @@ class TripsController < ApplicationController
       @list.quantity = sock_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
     
@@ -450,24 +468,26 @@ class TripsController < ApplicationController
       
       
       
-   PackingList.where(trip_id: @trip.id).each do |item| 
+   PackingList.where(trip_id: @trip.id).where("user_created" == ?", "false").each do |item| 
 	      item.destroy
 	      
     end
     
     
     # where algorithim starts  
-      no_of_weeks= @trip.duration/7.to_i
+      no_of_weeks= (@trip.duration)/7.to_i
       
-     # SHORT SLEEVE SHIRTS
+      # SHORT SLEEVE SHIRTS
     
-    if @trip.duration == 1 and @trip.season == "summer"
+    if @trip.duration >= 1 and @trip.season == "summer"
       short_sleeve_quantity = @trip.duration
       elsif @trip.season == "spring" and @trip.duration >1
-      short_sleeve_quantity = (3/4 * @trip.duration).to_i
+      short_sleeve_quantity = (@trip.duration * 0.75).to_i
       elsif @trip.season == "fall" and @trip.duration > 1
-      short_sleeve_quantity = (1/2 * @trip.duration).to_i
-      elsif @trip.season == "spring" or @trip.season ==  "fall" and @trip.duration == 1
+      short_sleeve_quantity = (@trip.duration * 0.5).to_i
+      elsif @trip.season == "spring" and @trip.duration == 1
+      short_sleeve_quantity = 1
+      elsif @trip.season ==  "fall" and @trip.duration == 1
       short_sleeve_quantity = 1
     else
       short_sleeve_quantity = 0
@@ -479,6 +499,7 @@ class TripsController < ApplicationController
       @list.quantity = short_sleeve_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+      @list.user_created = false
       @list.save
   
             
@@ -503,6 +524,7 @@ class TripsController < ApplicationController
       @list.quantity = long_sleeve_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       
@@ -529,6 +551,7 @@ class TripsController < ApplicationController
       @list.quantity = sweater_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       
@@ -549,6 +572,7 @@ class TripsController < ApplicationController
       @list.quantity = dress_shirt_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
 
@@ -565,6 +589,7 @@ class TripsController < ApplicationController
       @list.quantity = light_jacket_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       #OUTERWEAR
@@ -579,6 +604,7 @@ class TripsController < ApplicationController
       @list.quantity = outerwear_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
        
        
@@ -612,6 +638,7 @@ class TripsController < ApplicationController
         @list.quantity = short_quantity
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
         #SKIRTS
@@ -631,6 +658,7 @@ class TripsController < ApplicationController
         @list.quantity = skirt_quantity
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
         #DRESSES  
@@ -652,6 +680,7 @@ class TripsController < ApplicationController
         @list.quantity = dress_quantity
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
 
@@ -686,6 +715,7 @@ class TripsController < ApplicationController
       @list.quantity = jean_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
        #SWIMWEAR
@@ -709,6 +739,7 @@ class TripsController < ApplicationController
       @list.quantity = swimwear_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
       #FLIPFLOPS
@@ -726,6 +757,7 @@ class TripsController < ApplicationController
       @list.quantity = sandals_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       #WALKING SHOES
@@ -735,6 +767,7 @@ class TripsController < ApplicationController
       @list.quantity = 1
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
       
       # DRESS SHOES
@@ -744,6 +777,7 @@ class TripsController < ApplicationController
       @list.quantity = 1
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
       
@@ -756,6 +790,7 @@ class TripsController < ApplicationController
       @list.quantity = 1
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save 
       
       #BRAS
@@ -771,10 +806,11 @@ class TripsController < ApplicationController
     end
 				
         @list = PackingList.new
-        @list.item = "bra"
+        @list.item = "bras"
         @list.quantity = bra_quantity
         @list.trip_id = @trip.id
         @list.packed = "false"
+         @list.user_created = false
         @list.save
         
         #UNDERWEAR
@@ -792,6 +828,7 @@ class TripsController < ApplicationController
         @list.quantity = @trip.duration
         @list.trip_id = @trip.id
         @list.packed = false
+         @list.user_created = false
         @list.save
         
         
@@ -818,9 +855,12 @@ class TripsController < ApplicationController
       @list.quantity = sock_quantity
       @list.trip_id = @trip.id
       @list.packed = false
+       @list.user_created = false
       @list.save
 
-            
+    
+        
+     
       
 
       
