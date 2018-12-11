@@ -19,6 +19,11 @@ validates :quantity, presence: true
 validates :quantity, :numericality => { :greater_than => 0 }
 validates :trip_id, :presence => true
 
+validates :packed, inclusion: { in: [true, false] }
+validates :user_created, inclusion: { in: [true, false] }
+
+
+
     
 has_one :user, :through => :trip, :source => :user
 belongs_to :trip

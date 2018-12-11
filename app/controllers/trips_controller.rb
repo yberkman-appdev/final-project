@@ -39,16 +39,16 @@ class TripsController < ApplicationController
       @trip.save
       
     # where algorithim starts  
-      no_of_weeks= (@trip.duration/7).to_i
+      no_of_weeks= (@trip.duration * 0.14).round
       
      # SHORT SLEEVE SHIRTS
     
     if @trip.duration >= 1 and @trip.season == "summer"
       short_sleeve_quantity = @trip.duration
       elsif @trip.season == "spring" and @trip.duration >1
-      short_sleeve_quantity = (@trip.duration * 0.75).to_i
+      short_sleeve_quantity = (@trip.duration * 0.75).round
       elsif @trip.season == "fall" and @trip.duration > 1
-      short_sleeve_quantity = (@trip.duration * 0.5).to_i
+      short_sleeve_quantity = (@trip.duration * 0.5).round
       elsif @trip.season == "spring" and @trip.duration == 1
       short_sleeve_quantity = 1
       elsif @trip.season ==  "fall" and @trip.duration == 1
@@ -75,9 +75,9 @@ class TripsController < ApplicationController
       elsif@trip.season == "winter" and @trip.season == "fall" 
       long_sleeve_quantity = 1
       elsif @trip.season == "winter" and @trip.duration >1
-      long_sleeve_quantity = (@trip.duration * 0.75).to_i
+      long_sleeve_quantity = (@trip.duration * 0.75).round
       elsif @trip.season == "fall" and @trip.duration > 1
-      long_sleeve_quantity = (@trip.duration * 0.5).to_i
+      long_sleeve_quantity = (@trip.duration * 0.5).round
     else
       long_sleeve_quantity = 0
     end
@@ -218,7 +218,7 @@ class TripsController < ApplicationController
 	  end
 				
         @list = PackingList.new
-        @list.item = "skirt"
+        @list.item = "skirts"
         @list.quantity = skirt_quantity
         @list.trip_id = @trip.id
         @list.packed = false
@@ -240,7 +240,7 @@ class TripsController < ApplicationController
 	      end
 
         @list = PackingList.new
-        @list.item = "dress"
+        @list.item = "dresses"
         @list.quantity = dress_quantity
         @list.trip_id = @trip.id
         @list.packed = false
@@ -251,11 +251,11 @@ class TripsController < ApplicationController
       #JEANS
       
       if @trip.season == "winter" and @trip.duration >1
-	    jean_quantity = @trip.duration/2.to_i
+	    jean_quantity = (@trip.duration * 0.5).round
 	    elsif @trip.season == "winter" and @trip.duration == 1
 	    jean_quantity = 1
       elsif  User.find(@trip.user_id).gender == "male" and @trip.duration > 1  and @trip.season == "fall"
-	    jean_quantity = @trip.duration/2.to_i
+	    jean_quantity = (@trip.duration * 0.5).round
       elsif  User.find(@trip.user_id).gender == "male" and @trip.duration == 1  and @trip.season == "fall"
       jean_quantity = 1
       elsif User.find(@trip.user_id).gender == "female"  and @trip.season == "fall" and @trip.duration >=7
@@ -373,7 +373,7 @@ class TripsController < ApplicationController
         @list.item = "bras"
         @list.quantity = bra_quantity
         @list.trip_id = @trip.id
-        @list.packed = "false"
+        @list.packed = false
          @list.user_created = false
         @list.save
         
@@ -403,7 +403,7 @@ class TripsController < ApplicationController
 	     elsif @trip.season ==  "fall"
 	    sock_quantity = @trip.duration
       elsif @trip.season == "spring" and @trip.duration > 1
-	     sock_quantity = @trip.duration/2.to_i
+	     sock_quantity = (@trip.duration * 0.5).round
 	    elsif @trip.season == "spring" and @trip.duration == 1
 	    sock_quantity = 1
 	    elsif  @trip.season == "summer" and @trip.duration < 7
@@ -468,23 +468,23 @@ class TripsController < ApplicationController
       
       
       
-   PackingList.where(trip_id: @trip.id).where("user_created" == ?", "false").each do |item| 
+   PackingList.where(trip_id: @trip.id).where(user_created: false).each do |item| 
 	      item.destroy
 	      
     end
     
     
     # where algorithim starts  
-      no_of_weeks= (@trip.duration)/7.to_i
+      no_of_weeks= (@trip.duration * 0.14).round
       
       # SHORT SLEEVE SHIRTS
     
     if @trip.duration >= 1 and @trip.season == "summer"
       short_sleeve_quantity = @trip.duration
       elsif @trip.season == "spring" and @trip.duration >1
-      short_sleeve_quantity = (@trip.duration * 0.75).to_i
+      short_sleeve_quantity = (@trip.duration * 0.75).round
       elsif @trip.season == "fall" and @trip.duration > 1
-      short_sleeve_quantity = (@trip.duration * 0.5).to_i
+      short_sleeve_quantity = (@trip.duration * 0.5).round
       elsif @trip.season == "spring" and @trip.duration == 1
       short_sleeve_quantity = 1
       elsif @trip.season ==  "fall" and @trip.duration == 1
@@ -511,9 +511,9 @@ class TripsController < ApplicationController
       elsif@trip.season == "winter" and @trip.season == "fall" 
       long_sleeve_quantity = 1
       elsif @trip.season == "winter" and @trip.duration >1
-      long_sleeve_quantity = (@trip.duration * 0.75).to_i
+      long_sleeve_quantity = (@trip.duration * 0.75).round
       elsif @trip.season == "fall" and @trip.duration > 1
-      long_sleeve_quantity = (@trip.duration * 0.5).to_i
+      long_sleeve_quantity = (@trip.duration * 0.5).round
     else
       long_sleeve_quantity = 0
     end
@@ -654,7 +654,7 @@ class TripsController < ApplicationController
 	  end
 				
         @list = PackingList.new
-        @list.item = "skirt"
+        @list.item = "skirts"
         @list.quantity = skirt_quantity
         @list.trip_id = @trip.id
         @list.packed = false
@@ -676,7 +676,7 @@ class TripsController < ApplicationController
 	      end
 
         @list = PackingList.new
-        @list.item = "dress"
+        @list.item = "dresses"
         @list.quantity = dress_quantity
         @list.trip_id = @trip.id
         @list.packed = false
@@ -687,11 +687,11 @@ class TripsController < ApplicationController
       #JEANS
       
       if @trip.season == "winter" and @trip.duration >1
-	    jean_quantity = @trip.duration/2.to_i
+	    jean_quantity = (@trip.duration * 0.5).round
 	    elsif @trip.season == "winter" and @trip.duration == 1
 	    jean_quantity = 1
       elsif  User.find(@trip.user_id).gender == "male" and @trip.duration > 1  and @trip.season == "fall"
-	    jean_quantity = @trip.duration/2.to_i
+	    jean_quantity = (@trip.duration * 0.5).round
       elsif  User.find(@trip.user_id).gender == "male" and @trip.duration == 1  and @trip.season == "fall"
       jean_quantity = 1
       elsif User.find(@trip.user_id).gender == "female"  and @trip.season == "fall" and @trip.duration >=7
@@ -809,7 +809,7 @@ class TripsController < ApplicationController
         @list.item = "bras"
         @list.quantity = bra_quantity
         @list.trip_id = @trip.id
-        @list.packed = "false"
+        @list.packed = false
          @list.user_created = false
         @list.save
         
@@ -839,7 +839,7 @@ class TripsController < ApplicationController
 	     elsif @trip.season ==  "fall"
 	    sock_quantity = @trip.duration
       elsif @trip.season == "spring" and @trip.duration > 1
-	     sock_quantity = @trip.duration/2.to_i
+	     sock_quantity = (@trip.duration * 0.5).round
 	    elsif @trip.season == "spring" and @trip.duration == 1
 	    sock_quantity = 1
 	    elsif  @trip.season == "summer" and @trip.duration < 7

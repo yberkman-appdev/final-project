@@ -144,11 +144,9 @@ class PackingListsController < ApplicationController
     
     @item = PackingList.find(params.fetch("id_to_modify"))
 
-    @item.item = params.fetch("item")
-    @item.quantity = params.fetch("quantity")
-    @item.trip_id = params.fetch("trip_id")
-    @item.packed = params.fetch("packed")
-    @item.user_created = params.fetch("user_created")
+
+    @item.packed = false
+
 
     if @item.valid?
       @item.save
