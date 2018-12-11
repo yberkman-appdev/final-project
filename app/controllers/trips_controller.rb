@@ -173,11 +173,7 @@ class TripsController < ApplicationController
        
        
        #SHORTS
-        if User.find(@trip.user_id).gender == "female" and @trip.season == "spring" 
-        short_quantity = no_of_weeks  
-         elsif User.find(@trip.user_id).gender == "female" and @trip.season == "fall"
-        short_quantity = no_of_weeks 
-	      elsif  User.find(@trip.user_id).gender == "female" and @trip.duration < 7  and @trip.season == "spring"
+        if User.find(@trip.user_id).gender == "female" and @trip.duration < 7  and @trip.season == "spring"
         short_quantity = 1
            elsif  User.find(@trip.user_id).gender == "female" and @trip.duration < 7  and @trip.season ==  "summer"
         short_quantity = 1
@@ -609,11 +605,7 @@ class TripsController < ApplicationController
        
        
        #SHORTS
-        if User.find(@trip.user_id).gender == "female" and @trip.season == "spring" 
-        short_quantity = no_of_weeks  
-         elsif User.find(@trip.user_id).gender == "female" and @trip.season == "fall"
-        short_quantity = no_of_weeks 
-	      elsif  User.find(@trip.user_id).gender == "female" and @trip.duration < 7  and @trip.season == "spring"
+        if User.find(@trip.user_id).gender == "female" and @trip.duration < 7  and @trip.season == "spring"
         short_quantity = 1
            elsif  User.find(@trip.user_id).gender == "female" and @trip.duration < 7  and @trip.season ==  "summer"
         short_quantity = 1

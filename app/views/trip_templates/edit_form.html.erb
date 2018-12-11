@@ -27,7 +27,49 @@
       Local Weather
     </label>
     <div>
+      
+      <% case @trip.season %>
+      <% when "spring"%>
 
+   <select name="season">
+     <option value="<%@trip.season%>">Spring</option>
+    <option value = "winter"> Winter </option>
+     <option value = "summer"> Summer </option>
+      <option value = "fall"> Fall </option>
+  </select> 
+  
+   <% when "fall"%>
+
+   <select name="season">
+     <option value="<%@trip.season%>">Fall</option>
+    <option value = "winter"> Winter </option>
+     <option value = "summer"> Summer </option>
+      <option value = "spring"> Spring </option>
+  </select> 
+  
+   
+   <% when "winter"%>
+
+   <select name="season">
+     <option value="<%@trip.season%>">Winter</option>
+    <option value = "fall"> Fall </option>
+     <option value = "summer"> Summer </option>
+      <option value = "spring"> Spring </option>
+  </select> 
+  
+   <% when "summer"%>
+
+   <select name="season">
+     <option value="<%@trip.season%>">Summer</option>
+    <option value = "fall"> Fall </option>
+     <option value = "winter"> Winter </option>
+      <option value = "spring"> Spring </option>
+  </select> 
+  
+  
+  
+    <%else%>
+    
    <select name="season">
      <option value="">Select one</option>
     <option value = "winter"> Winter </option>
@@ -35,6 +77,8 @@
      <option value = "summer"> Summer </option>
       <option value = "fall"> Fall </option>
   </select> 
+  <%end%>
+    
   
   </div>
   </div>
