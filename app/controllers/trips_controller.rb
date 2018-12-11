@@ -247,7 +247,7 @@ class TripsController < ApplicationController
       #JEANS
       
       if @trip.season == "winter" and @trip.duration >1
-	    jean_quantity = (@trip.duration * 0.5).round
+	    jean_quantity = (@trip.duration * 0.25).round
 	    elsif @trip.season == "winter" and @trip.duration == 1
 	    jean_quantity = 1
       elsif  User.find(@trip.user_id).gender == "male" and @trip.duration > 1  and @trip.season == "fall"
@@ -679,7 +679,7 @@ class TripsController < ApplicationController
       #JEANS
       
       if @trip.season == "winter" and @trip.duration >1
-	    jean_quantity = (@trip.duration * 0.5).round
+	    jean_quantity = (@trip.duration * 0.25).round
 	    elsif @trip.season == "winter" and @trip.duration == 1
 	    jean_quantity = 1
       elsif  User.find(@trip.user_id).gender == "male" and @trip.duration > 1  and @trip.season == "fall"
