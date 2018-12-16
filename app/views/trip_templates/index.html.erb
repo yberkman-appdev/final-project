@@ -1,0 +1,83 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1 >
+      All packing lists
+    </h1>
+
+    <a href="/trips/new" class="btn btn-block btn-outline-info">
+      Add a new trip
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr class="table-info">
+        
+
+        <th>
+          
+          <center>
+          My Trips
+          </center>
+        </th>
+        <th>
+          <center>
+          Edit
+          </center>
+        </th>
+           <th>
+             <center>
+          Delete
+          </center>
+        </th>
+
+
+ 
+
+
+      </tr>
+      
+
+      <% @trips.where(user_id: current_user.id).each do |trip| %>
+      <tr>
+
+
+        <td>
+          <center>
+       
+         <a href="/trips/<%= trip.id %>">
+           
+          <%= trip.destination + " " + trip.duration.to_s + "-day " + trip.season.capitalize + " Vacation" %>
+           </a>
+           </center>
+      
+        </td>
+         <td>
+        
+          <a href="/trips/<%= trip.id %>/edit" class="btn btn-sm btn-block btn-outline-info">
+          Edit trip
+        </a>
+
+        </td>
+        
+        <td>
+          <a href="/delete_trip/<%= trip.id %>" class="btn btn-sm btn-block btn-outline-info">
+          Delete trip
+        </a>
+          
+        </td>
+       
+
+       
+
+        
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

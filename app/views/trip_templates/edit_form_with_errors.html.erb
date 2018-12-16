@@ -1,0 +1,106 @@
+<% if @trip.errors.any? %>
+  <% @trip.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit trip details
+</h1>
+
+<hr class = "border-info">
+
+<form action="/update_trip/<%= @trip.id %>" method="post">
+
+  <div class="form-group">
+    <label for="destination">
+      Where to
+    </label>
+
+    <input type="text" id="destination" name="destination" class="form-control" value="<%= @trip.destination %>">
+  </div>
+
+  <div class="form-group">
+    <label for="duration">
+      How long
+    </label>
+
+    <input type="text" id="duration" name="duration" class="form-control" value="<%= @trip.duration %>">
+  </div>
+
+  <div class="form-group">
+    <label for="season">
+     Local Weather
+    </label>
+<div>
+   <% case @trip.season %>
+      <% when "spring"%>
+
+   <select name="season">
+     <option value="spring">Spring</option>
+    <option value = "winter"> Winter </option>
+     <option value = "summer"> Summer </option>
+      <option value = "fall"> Fall </option>
+  </select> 
+  
+   <% when "fall"%>
+
+   <select name="season">
+     <option value="fall">Fall</option>
+    <option value = "winter"> Winter </option>
+     <option value = "summer"> Summer </option>
+      <option value = "spring"> Spring </option>
+  </select> 
+  
+   
+   <% when "winter"%>
+
+   <select name="season">
+     <option value="winter">Winter</option>
+    <option value = "fall"> Fall </option>
+     <option value = "summer"> Summer </option>
+      <option value = "spring"> Spring </option>
+  </select> 
+  
+   <% when "summer"%>
+
+   <select name="season">
+     <option value="summer">Summer</option>
+    <option value = "fall"> Fall </option>
+     <option value = "winter"> Winter </option>
+      <option value = "spring"> Spring </option>
+  </select> 
+  
+  
+  
+    <%else%>
+    
+   <select name="season">
+     <option value="">Select one</option>
+    <option value = "winter"> Winter </option>
+    <option value = "spring"> Spring </option>
+     <option value = "summer"> Summer </option>
+      <option value = "fall"> Fall </option>
+  </select> 
+  <%end%>
+    
+  </div>
+  </div>
+
+  <div class="form-group">
+
+    <input type="hidden" name = "user_id" value = "<%=@trip.user_id%>">
+  </div>
+
+  <button class="btn btn-block btn-outline-info border-secondary">
+    Update trip
+  </button>
+</form>
+
+<hr class= "border-info">
+
+<a href="/trips/<%=@trip.id%>">
+  Go back
+</a>

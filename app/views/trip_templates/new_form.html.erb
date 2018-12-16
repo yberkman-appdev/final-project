@@ -1,0 +1,53 @@
+<h1 >
+  Add a new trip
+</h1>
+
+
+<hr class = "border-info">
+
+<form action="/create_trip" method="post">
+
+  <div class="form-group">
+    <label for="destination">
+      Heading to
+    </label>
+
+    <input type="text" id="destination" name="destination" class="form-control border-info" placeholder = "Enter your travel destination">
+  </div>
+
+  <div class="form-group">
+    <label for="duration">
+      How long
+    </label>
+
+    <input type="text" id="duration" name="duration" class="form-control border-info" placeholder = "Enter the number of days">
+  </div>
+
+  <div class="form-group border-info">
+    <label for="season">
+      Local Weather
+    </label>
+<div>
+  <select name="season">
+     <option value="">Select one</option>
+    <option value = "winter"> Winter </option>
+    <option value = "spring"> Spring </option>
+     <option value = "summer"> Summer </option>
+      <option value = "fall"> Fall </option>
+  </select> 
+</div>
+  <div class="form-group">
+
+    <input type="hidden" id="user_id" name="user_id" class="form-control " value="<%=current_user.id%>">
+  </div>
+
+  <button class="btn btn-block btn-outline-info">
+    Create trip
+  </button>
+</form>
+
+<hr class="border-info">
+
+<a href="/trips">
+  Go back
+</a>

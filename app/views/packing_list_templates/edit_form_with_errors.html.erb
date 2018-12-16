@@ -1,0 +1,50 @@
+<% if @packing_list.errors.any? %>
+  <% @packing_list.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit packing list #<%= @packing_list.id %>
+</h1>
+
+<hr>
+
+<form action="/update_packing_list/<%= @packing_list.id %>" method="post">
+
+  <div class="form-group">
+    <label for="item">
+      Item
+    </label>
+
+    <input type="text" id="item" name="item" class="form-control" value="<%= @packing_list.item %>">
+  </div>
+
+  <div class="form-group">
+    <label for="quantity">
+      Quantity
+    </label>
+
+    <input type="text" id="quantity" name="quantity" class="form-control" value="<%= @packing_list.quantity %>">
+  </div>
+
+  <div class="form-group">
+    <label for="trip_id">
+      Trip
+    </label>
+
+    <input type="text" id="trip_id" name="trip_id" class="form-control" value="<%= @packing_list.trip_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update packing list
+  </button>
+</form>
+
+<hr>
+
+<a href="/packing_lists">
+  Go back
+</a>
