@@ -127,7 +127,7 @@ class PackingListsController < ApplicationController
     @item.item = params.fetch("item")
     @item.quantity = params.fetch("quantity")
     @item.trip_id = params.fetch("trip_id")
-    @item.packed = params.fetch("packed")
+    @item.packed = true
     @item.user_created = params.fetch("user_created")
 
     if @item.valid?
